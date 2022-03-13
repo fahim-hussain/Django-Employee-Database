@@ -1,0 +1,98 @@
+{% extends 'employees/baseHeader.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.firstName|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.lastName|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.email|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.SSN|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                    {{ form.addressStreet|as_crispy_field }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ form.addressState|as_crispy_field }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                {{ form.addressCity|as_crispy_field }}
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{ form.addressPostal|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend> Company Information</legend>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                       {{ form.isManager|as_crispy_field }}
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form.employeeNum|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form.status|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form.department|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{ form.hireDate|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
