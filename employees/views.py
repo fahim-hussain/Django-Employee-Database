@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .dataService import *
-
-
-initialize()
+from .forms import EmployeeForm
 
 
 # Create your views here.
@@ -18,19 +16,18 @@ def employeesPage(request):
 
 def employeeDetail(request, empid):
     employees = getEmployeeById(empid)
+
     if request.method == 'POST':
         emp = EmployeeForm(request.POST)
 
         if emp.is_valid():
-            updateEmployee(emp)
             return employeesPage(request)
         else:
             form = EmployeeForm(request.POST)
             return render(request, 'employees/employeeDetail.html', {'form': form})
     else:
-        form = EmployeeForm(employees)
-
-        return render(request, 'employees/employeeDetail.html', {'form': form})
+        form = EmployeeForm(instance=employees)
+        return render(request, 'employees/employeeDetail.html', {'form': form, 'empid': empid})
 
 
 def statusEmployee(request, status):
@@ -71,3 +68,8 @@ def addEmployee(request):
     else:
         form = EmployeeForm()
         return render(request, 'employees/addEmployee.html', {'form': form})
+
+
+def employeeDelete(request, empid):
+    deleteEmployee(empid)
+    return employeesPage(request)

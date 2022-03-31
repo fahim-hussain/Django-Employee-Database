@@ -10,5 +10,6 @@ urlpatterns = [
     path('employee/manager/<manid>', views.managerEmployee),
     path('employee/status/<status>', views.statusEmployee),
     path('Managers/', views.managers),
+    path('Employee/delete/<empid>', views.employeeDelete),
     path('', views.homepage)
 ]

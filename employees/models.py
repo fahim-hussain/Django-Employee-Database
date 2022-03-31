@@ -23,7 +23,7 @@ class Employee(models.Model):
     firstName = models.CharField(max_length=50)
     lastName = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
-    SSN = models.CharField(max_length=9)
+    SSN = models.CharField(max_length=11)
 
     addressStreet = models.CharField(max_length=100)
     addressCity = models.CharField(max_length=50)
@@ -31,8 +31,13 @@ class Employee(models.Model):
     addressPostal = models.CharField(max_length=10)
 
     isManager = models.BooleanField()
-    employeeNum = models.IntegerField()
+    employeeNum = models.IntegerField(primary_key=True)
+    managerId = models.IntegerField(blank=True, null=True)
     status = models.CharField(choices=status, max_length=15)
     department = models.CharField(choices=department, max_length=25)
     hireDate = models.DateField(max_length=25)
 
+
+class Department(models.Model):
+    deptId = models.IntegerField(primary_key=True)
+    departmentName = models.CharField(max_length=30)

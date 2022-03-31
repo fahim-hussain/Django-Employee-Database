@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     # my apps
     'employees',
     'crispy_forms',
-    'djongo',
+    'rest_framework',
 
     # django apps
     'django.contrib.admin',

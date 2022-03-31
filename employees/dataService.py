@@ -1,76 +1,78 @@
-import os.path
-import json
-from django.conf import settings
-from .forms import EmployeeForm
-
-employeeList = []
-departmentList = []
-
-
-def initialize():
-    with open(os.path.join(settings.BASE_DIR, 'static/employees.json')) as f:
-        global employeeList
-        employeeList = json.load(f)
-
-    with open(os.path.join(settings.BASE_DIR, 'static/departments.json')) as f:
-        global departmentList
-        departmentList = json.load(f)
+from .models import Employee, Department
 
 
 def getEmployeeById(empid):
-    for i in range(len(employeeList)):
-        if str(employeeList[i]['employeeNum']) == empid:
-            return employeeList[i]
+    return Employee.objects.get(pk=empid)
 
 
 def appendEmployee(emp):
     empdata = emp.cleaned_data
-    employeeList.append(empdata)
+    firstName = empdata['firstName']
+    lastName = empdata['lastName']
+    email = empdata['email']
+    SSN = empdata['SSN']
+    addressStreet = empdata['addressStreet']
+    addressState = empdata['addressState']
+    addressCity = empdata['addressCity']
+    addressPostal = empdata['addressPostal']
+    isManager = empdata['isManager']
+    status = empdata['status']
+    department = empdata['department']
+    hireDate = empdata['hireDate']
+    emp = Employee(firstName=firstName, lastName=lastName, email=email, SSN=SSN, addressStreet=addressStreet,
+                   addressState=addressState, addressCity=addressCity, addressPostal=addressPostal,
+                   isManager=isManager, status=status, department=department,
+                   hireDate=hireDate)
+    emp.save()
 
 
 def updateEmployee(emp):
     empdata = emp.cleaned_data
-    print(empdata['employeeNum'])
-    for i in range(len(employeeList)):
-        if str(employeeList[i]['employeeNum']) == empdata['employeeNum']:
-            employeeList[i] = empdata
+    emp = Employee.objects.get(pk=empdata['employeeNum'])
+
+    emp.firstName = empdata['firstName']
+    emp.lastName = empdata['lastName']
+    emp.email = empdata['email']
+    emp.SSN = empdata['SSN']
+    emp.addressStreet = empdata['addressStreet']
+    emp.addressState = empdata['addressState']
+    emp.addressCity = empdata['addressCity']
+    emp.addressPostal = empdata['addressPostal']
+    emp.isManager = empdata['isManager']
+    emp.status = empdata['status']
+    emp.department = empdata['department']
+    emp.hireDate = empdata['hireDate']
+    emp.save()
 
 
 def getEmployeeByStatus(status):
-    emp = []
-    for i in range(len(employeeList)):
-        if str(employeeList[i]['status']) == status:
-            emp.append(employeeList[i])
+    emp = Employee.objects.all().filter(status=status)
     return emp
 
 
 def getEmployee():
-    return employeeList
+    return Employee.objects.all()
 
 
 def getDepartment():
-    return departmentList
+    return Department.objects.all()
 
 
 def getEmployeeByDepartment(depid):
-    depemp = []
-    for i in range(len(employeeList)):
-        if str(employeeList[i]['department']) == depid:
-            depemp.append(employeeList[i])
+    depemp = Employee.objects.all().filter(department=depid)
     return depemp
 
 
 def getEmployeeByManagerId(manid):
-    manemp = []
-    for i in range(len(employeeList)):
-        if str(employeeList[i]['employeeManagerNum']) == manid:
-            manemp.append(employeeList[i])
+    manemp = Employee.objects.all().filter(employeeNum=manid)
     return manemp
 
 
 def getManager():
-    managers = []
-    for i in range(len(employeeList)):
-        if employeeList[i]['isManager']:
-            managers.append(employeeList[i])
+    managers = Employee.objects.all().filter(isManager=True)
     return managers
+
+
+def deleteEmployee(empid):
+    employee = Employee.objects.get(pk=empid)
+    employee.delete()

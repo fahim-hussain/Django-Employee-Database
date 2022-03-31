@@ -32,9 +32,9 @@
                             <td><a href="/Employee/{{i.employeeNum}}">{{i.firstName}}  {{i.lastName}}</a></td>
                             <td>{{i.email}}</td>
                             <td>{{i.addressStreet}}, {{i.addressCity}} {{i.addressState}}, {{i.addressPostal}}</td>
-                            <td><a href="/employee/manager/{{i.employeeManagerNum}}">
-                                {% if i.employeeManagerNum != null %}
-                                    {{i.employeeManagerNum}}
+                            <td><a href="/employee/manager/{{i.managerId}}">
+                                {% if i.managerId != null %}
+                                    {{i.managerId}}
                                 {% endif %}
                             </a></td>
                             <td><a href="/employee/status/{{i.status}}">{{i.status}}</a></td>
