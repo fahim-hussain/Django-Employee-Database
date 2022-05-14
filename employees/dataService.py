@@ -7,6 +7,7 @@ def getEmployeeById(empid):
 
 def appendEmployee(emp):
     empdata = emp.cleaned_data
+    print(empdata)
     firstName = empdata['firstName']
     lastName = empdata['lastName']
     email = empdata['email']
@@ -16,12 +17,13 @@ def appendEmployee(emp):
     addressCity = empdata['addressCity']
     addressPostal = empdata['addressPostal']
     isManager = empdata['isManager']
+    managerId = empdata['managerId']
     status = empdata['status']
     department = empdata['department']
     hireDate = empdata['hireDate']
     emp = Employee(firstName=firstName, lastName=lastName, email=email, SSN=SSN, addressStreet=addressStreet,
                    addressState=addressState, addressCity=addressCity, addressPostal=addressPostal,
-                   isManager=isManager, status=status, department=department,
+                   isManager=isManager, managerId=managerId, status=status, department=department,
                    hireDate=hireDate)
     emp.save()
 
@@ -39,6 +41,7 @@ def updateEmployee(emp):
     emp.addressCity = empdata['addressCity']
     emp.addressPostal = empdata['addressPostal']
     emp.isManager = empdata['isManager']
+    emp.managerId = empdata['managerId']
     emp.status = empdata['status']
     emp.department = empdata['department']
     emp.hireDate = empdata['hireDate']

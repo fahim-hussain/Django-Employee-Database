@@ -33,9 +33,7 @@
                             <td>{{i.email}}</td>
                             <td>{{i.addressStreet}}, {{i.addressCity}} {{i.addressState}}, {{i.addressPostal}}</td>
                             <td><a href="/employee/manager/{{i.managerId}}">
-                                {% if i.managerId != null %}
-                                    {{i.managerId}}
-                                {% endif %}
+                                {{i.managerId}}
                             </a></td>
                             <td><a href="/employee/status/{{i.status}}">{{i.status}}</a></td>
                             <td><a href="/employee/department/{{i.department}}">{{i.department}}</a></td>

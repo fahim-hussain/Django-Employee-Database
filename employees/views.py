@@ -63,6 +63,7 @@ def addEmployee(request):
             appendEmployee(emp)
             return employeesPage(request)
         else:
+            print("recieved")
             form = EmployeeForm(request.POST)
             return render(request, 'employees/addEmployee.html', {'form': form})
     else:

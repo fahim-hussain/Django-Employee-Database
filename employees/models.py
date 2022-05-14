@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django import forms
 
 # Create your models here.
@@ -20,24 +21,26 @@ department = [
 
 
 class Employee(models.Model):
-    firstName = models.CharField(max_length=50)
-    lastName = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
-    SSN = models.CharField(max_length=11)
+    firstName = models.CharField(max_length=50, verbose_name="First Name")
+    lastName = models.CharField(max_length=50, verbose_name="Last Name")
+    email = models.EmailField(max_length=50, verbose_name="Email")
+    SSN = models.CharField(max_length=11, verbose_name="Social Security Number")
 
-    addressStreet = models.CharField(max_length=100)
-    addressCity = models.CharField(max_length=50)
-    addressState = models.CharField(max_length=100)
-    addressPostal = models.CharField(max_length=10)
+    addressStreet = models.CharField(max_length=100, verbose_name="Street")
+    addressCity = models.CharField(max_length=50, verbose_name="City")
+    addressState = models.CharField(max_length=100, verbose_name="State")
+    addressPostal = models.CharField(max_length=10, verbose_name="Postal Code")
 
-    isManager = models.BooleanField()
-    employeeNum = models.IntegerField(primary_key=True)
-    managerId = models.IntegerField(blank=True, null=True)
-    status = models.CharField(choices=status, max_length=15)
-    department = models.CharField(choices=department, max_length=25)
-    hireDate = models.DateField(max_length=25)
+    isManager = models.BooleanField(verbose_name="Manager")
+    employeeNum = models.IntegerField(primary_key=True, verbose_name="Employee Number")
+    managerId = models.IntegerField(blank=True, null=True, verbose_name="Manager Id")
+    status = models.CharField(choices=status, max_length=15, verbose_name="Status")
+    department = models.CharField(choices=department, max_length=25, verbose_name="Department")
+    hireDate = models.DateField(max_length=25, verbose_name="Hire Date")
 
 
 class Department(models.Model):
     deptId = models.IntegerField(primary_key=True)
     departmentName = models.CharField(max_length=30)
+
+
